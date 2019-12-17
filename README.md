@@ -31,7 +31,7 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 Update the project to achieve the UI shown below:<br /><br />
 
-![Sample completed app](https://github.com/nikosandronikos/reactCalendar/blob/master/example.PNG)
+![Sample completed app](https://github.com/nikosandronikos/reactCalendarIncomplete/blob/master/example.PNG)
 
 1. Implement DayDisplay as a functional component
 2. Extend the Calendar component to include a check box that disables selection
