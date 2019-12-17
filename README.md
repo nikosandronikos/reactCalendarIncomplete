@@ -34,9 +34,9 @@ Update the project to achieve the UI shown below:<br /><br />
 ![Sample completed app](https://github.com/nikosandronikos/reactCalendarIncomplete/blob/master/example.PNG)
 
 1. Implement DayDisplay as a functional component
-2. Extend the Calendar component to include a check box that disables selection
-   dates that occur on a weekend
+2. Extend the Calendar component to display days that fall on a weekend in a different colour
+3. Add a check box that disables selection of dates that occur on a weekend
    Reference: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox
-3. Fix any errors or warnings that are displayed in the developer console
+4. Fix any errors or warnings that are displayed in the developer console
    For Firefox: https://developer.mozilla.org/en-US/docs/Tools/Web_Console/Opening_the_Web_Console
 
