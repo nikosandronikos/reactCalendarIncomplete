@@ -12,7 +12,8 @@ class App extends React.Component {
         this.state = {
             year: 2019,
             month: 1,   // zero based. 0 = January
-            day: null
+            day: null,
+            disableWeekends: false
         };
     }
 
@@ -20,14 +21,32 @@ class App extends React.Component {
         this.setState({ day: day });
     }
 
+    handleCheckboxChange(event) {
+        this.setState({ disableWeekends: event.target.checked });
+    }
+
     render() {
         // Note we create a new function for onChange via the bind function, the new
         // returned function is bound to 'this' so that whatever context the call back
         // is passed to and executed in, 'this' is always our App class instance.
+        //
+        // We make the binding to "this" so that when the handle functions get called,
+        // they have some "context object" to use.
         return (
             <div className="App">
                 <div className="CalendarDisplay">
-                    <Calendar year={this.state.year} month={this.state.month} onChange={this.handleCalendarChange.bind(this)}/>
+                    <input
+                        type="checkbox"
+                        name="disableWeekends" 
+                        onChange={this.handleCheckboxChange.bind(this)}
+                    />
+                    <label> Disable weekends </label>
+                    <Calendar
+                        year={this.state.year}
+                        month={this.state.month}
+                        disableWeekends={this.state.disableWeekends}
+                        onChange={this.handleCalendarChange.bind(this)}
+                    />
                     <DayDisplay year={this.state.year} month={this.state.month} day={this.state.day} />
                 </div>
             </div>

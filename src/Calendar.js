@@ -23,7 +23,7 @@ class Calendar extends React.Component {
         // a re-render, only changes the internal state will.
 
         this.state = {
-            daysInMonth: daysInMonth(props.year, props.month)
+            daysInMonth: daysInMonth(props.year, props.month),
         };
     }
 
@@ -37,13 +37,28 @@ class Calendar extends React.Component {
         if (this.props.onChange) this.props.onChange(this.props.id, day);
     }
 
+    // day is an integer. An element of days array incremented by 1.
     _renderDay(day) {
+        let classNameInput = null;
+        const dayNumber = (new Date(this.props.year, this.props.month, day)).getDay();
+        
+        if (day === this.state.selected) {
+            classNameInput = "calendarDay calendarDaySelected";
+        } else if (dayNumber === 0 || dayNumber === 6) {
+            classNameInput = "calendarDay calendarDayWeekend";
+        } else {
+            classNameInput = "calendarDay";
+        }
+        
+        /*
+         * null was used here in the ternary operator instead of "" as JSX expects a function, not a string.
+         */
         return (
             <>
                 <div
-                    className={`calendarDay${day === this.state.selected ? ' calendarDaySelected':''}`}
+                    className={classNameInput}
                     id={day}
-                    onClick={this.handleClick.bind(this)}
+                    onClick={this.props.disableWeekends === true && (dayNumber === 0 || dayNumber === 6) ? null : this.handleClick.bind(this)}
                 >
                 {day}
                 </div>
@@ -54,7 +69,12 @@ class Calendar extends React.Component {
 
     render() {
         const days = [...(new Array(this.state.daysInMonth)).keys()];
-
+        
+        /*
+         * This leads to the warning: "Warning: Each child in a list should have a unique "key" prop.".
+         * However, this is fine as the days array is a static array, which will not be edited,
+         * rearranged or filtered. Therefore, we don't need a unique key for each item.
+         */
         return (
             <div className='calendar'>
                 {days.map( day => this._renderDay(day + 1))}
